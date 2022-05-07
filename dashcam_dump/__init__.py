@@ -7,7 +7,7 @@ import typing
 import datetime
 import shutil
 
-SDCARD_PATH: str = "F:/DCIM"
+SDCARD_PATH: str = "G:/DCIM"
 DESTINATION_PATH_ROOT: str = "E:/dashcam_dump"
 SLEEP_SECONDS: str = 60 * 60
 logging.basicConfig(level="DEBUG")
@@ -34,9 +34,8 @@ def copy_files(files_to_copy):
         _file_shortname_no_ext = _file.rsplit("/", 1)[1].split(".")[0]
         _ext = _file.rsplit("/", 1)[1].split(".")[1]
         # TODO: this below is an estimation and only works on windows presumably
-        _is_event = False
-        # True if os.stat(_file).st_mode < 33206 else False
-        # logging.info("is event") if _is_event else None
+        _is_event = True if os.stat(_file).st_mode < 33206 else False
+        logging.info("is event") if _is_event else None
         _this_dest_file = "%s/%s_cam%s%s.%s" % (
             _this_dest_dir,
             _file_shortname_no_ext,
@@ -46,7 +45,7 @@ def copy_files(files_to_copy):
         )
         logging.info("copying file %s to %s", _file, _this_dest_file)
         os.chmod(_file, stat.S_IREAD)
-        shutil.copyfile(_file, _this_dest_file)
+        shutil.copy2(_file, _this_dest_file)
         # if _is_event:
         #     logging.info("marking file read write")
         os.chmod(_file, stat.S_IWRITE)
