@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "dashcam_dumper"
+name = "dashcam_dump"
 version = "0.1.0"
 description = "wait for sdcard, identify from dash cam, dump card, erase video"
 authors = ["James Delancey <jamesdelanceyjr@gmail.com>"]
