@@ -46,7 +46,7 @@ def copy_files(files_to_copy):
         )
         logging.info("copying file %s to %s", _file, _this_dest_file)
         os.chmod(_file, stat.S_IREAD)
-        shutil.copy2(_file, _this_dest_file)
+        shutil.copyfile(_file, _this_dest_file)
         # if _is_event:
         #     logging.info("marking file read write")
         os.chmod(_file, stat.S_IWRITE)
